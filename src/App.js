@@ -10,7 +10,9 @@ import {
 } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import React from 'react';
+
 const { Content, Footer, Sider } = Layout;
+
 const items = [
   UserOutlined,
   VideoCameraOutlined,
@@ -25,8 +27,9 @@ const items = [
   icon: React.createElement(icon),
   label: `nav ${index + 1}`
 }));
+
 const App = () => (
-  <Layout hasSider>
+  <Layout style={{ height: '100%' }} hasSider>
     <Sider
       style={{
         overflow: 'auto',
@@ -60,20 +63,6 @@ const App = () => (
           }}
         >
           <p>long content</p>
-          {
-            // indicates very long content
-            Array.from(
-              {
-                length: 100
-              },
-              (_, index) => (
-                <React.Fragment key={index}>
-                  {index % 20 === 0 && index ? 'more' : '...'}
-                  <br />
-                </React.Fragment>
-              )
-            )
-          }
         </div>
       </Content>
       <Footer
