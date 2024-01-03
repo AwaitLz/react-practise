@@ -1,78 +1,70 @@
+import React, { useState } from 'react';
 import {
-  AppstoreOutlined,
-  BarChartOutlined,
-  CloudOutlined,
-  ShopOutlined,
-  TeamOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
 } from '@ant-design/icons';
-import { Layout, Menu } from 'antd';
-import React from 'react';
-
-const { Content, Footer, Sider } = Layout;
-
-const items = [
-  UserOutlined,
-  VideoCameraOutlined,
-  UploadOutlined,
-  BarChartOutlined,
-  CloudOutlined,
-  AppstoreOutlined,
-  TeamOutlined,
-  ShopOutlined
-].map((icon, index) => ({
-  key: String(index + 1),
-  icon: React.createElement(icon),
-  label: `nav ${index + 1}`
-}));
-
-const App = () => (
-  <Layout style={{ height: '100%' }} hasSider>
-    <Sider
-      style={{
-        overflow: 'auto',
-        height: '100vh',
-        position: 'fixed',
-        left: 0,
-        top: 0,
-        bottom: 0
-      }}
-    >
-      <div className='logo' />
-      <Menu theme='dark' mode='inline' defaultSelectedKeys={['4']} items={items} />
-    </Sider>
-    <Layout
-      className='site-layout'
-      style={{
-        marginLeft: 200
-      }}
-    >
-      <Content
-        style={{
-          margin: '24px 16px 0',
-          overflow: 'initial'
-        }}
-      >
-        <div
-          className='site-layout-background'
+import { Layout, Menu, Button, theme } from 'antd';
+const { Header, Sider, Content } = Layout;
+const App = () => {
+  const [collapsed, setCollapsed] = useState(false);
+  const {
+    token: { colorBgContainer, borderRadiusLG },
+  } = theme.useToken();
+  return (
+    <Layout>
+      <Sider trigger={null} collapsible collapsed={collapsed}>
+        <div className="demo-logo-vertical" />
+        <Menu
+          theme="dark"
+          mode="inline"
+          defaultSelectedKeys={['1']}
+          items={[
+            {
+              key: '1',
+              label: 'nav 1',
+            },
+            {
+              key: '2',
+              label: 'nav 2',
+            },
+            {
+              key: '3',
+              label: 'nav 3',
+            },
+          ]}
+        />
+      </Sider>
+      <Layout>
+        <Header
           style={{
-            padding: 24,
-            textAlign: 'center'
+            padding: 0,
+            background: colorBgContainer,
           }}
         >
-          <p>long content</p>
-        </div>
-      </Content>
-      <Footer
-        style={{
-          textAlign: 'center'
-        }}
-      >
-        Ant Design ©2018 Created by Ant UED
-      </Footer>
+          <Button
+            type="text"
+            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+            onClick={() => setCollapsed(!collapsed)}
+            style={{
+              fontSize: '16px',
+              width: 64,
+              height: 64,
+            }}
+          />
+        </Header>
+        <Content
+          style={{
+            margin: '24px 16px',
+            padding: 24,
+            minHeight: 280,
+            background: colorBgContainer,
+            borderRadius: borderRadiusLG,
+          }}
+        >
+          
+        </Content>Content
+      </Layout>
     </Layout>
-  </Layout>
-);
+  );
+};
 export default App;
